@@ -22,7 +22,6 @@ describe('demo tests by Protractor', () => {
   });
 
   it('should display four links', async () => {
-    page = await AppPage.navigateTo();
     expect(page.isLinkVisible('Tour of Heroes')).toEqual(true);
     expect(page.isLinkVisible('CLI Documentation')).toEqual(true);
     expect(page.isLinkVisible('Angular blog')).toEqual(true);
@@ -36,19 +35,19 @@ describe('demo tests by Protractor', () => {
   });
 
   it('check CLI Documentation', async () => {
-    browser.waitForAngularEnabled(false);
+    await browser.waitForAngularEnabled(false);
     page.getLink('CLI Documentation').click();
     const urlInNewTab = await page.getNewTabUrl();
     expect(urlInNewTab).toContain('https://github.com/angular/angular-cli/wiki');
-    browser.waitForAngularEnabled(true);
+    await browser.waitForAngularEnabled(true);
   });
 
   it('check Angular blog', async () => {
-    browser.waitForAngularEnabled(false);
+    await browser.waitForAngularEnabled(false);
     page.getLink('Angular blog').click();
     const urlInNewTab = await page.getNewTabUrl();
     expect(urlInNewTab).toContain('https://blog.angular.io/');
-    browser.waitForAngularEnabled(true);
+    await browser.waitForAngularEnabled(true);
   });
 
   it('check Redirect to deep page', async () => {
