@@ -1,0 +1,15 @@
+.back-link {
+  margin-bottom: 24px;
+}
+.content-container, .content {
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  align-items: center;
+}
+
+img, button {
+  margin-bottom: 16px;
+}

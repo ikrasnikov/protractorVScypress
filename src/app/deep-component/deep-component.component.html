@@ -1,0 +1,17 @@
+<div class="content-container">
+  <a class="back-link"
+     routerLink="/main">to main page</a>
+  <div class="content">
+    <h2>I will show you some pictures if you click the button</h2>
+    <img width="75"
+         src="../../assets/170-1707001_arrow-button-pointing-down-png-image-down-arrow.png">
+    <button (click)="nextPicture()">
+      Click me!
+    </button>
+    <img *ngIf="imageSource"
+         width="300"
+         [src]="imageSource">
+  </div>
+</div>
+
+
