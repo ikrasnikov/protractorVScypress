@@ -1,13 +1,48 @@
 <div class="content-container">
   <a class="back-link"
-     routerLink="/main">to main page</a>
+     routerLink="/main">
+    to main page
+  </a>
+
+  <div class="user-form-container">
+    <div class="user-form">
+      <div>
+        I am user form
+      </div>
+
+      <input type="text" placeholder="First name" #firstName>
+
+      <input type="text" placeholder="Last name" #lastName>
+
+      <button class="user-submit"
+              (click)="submit(firstName.value, lastName.value)">
+        Submit user
+      </button>
+    </div>
+
+    <div *ngIf="user.lastName && user.lastName" class="user-data">
+      <div>
+        New user:
+      </div>
+
+      <div class="user">
+        {{ user.firstName }} {{ user.lastName }}
+      </div>
+    </div>
+  </div>
+
   <div class="content">
-    <h2>I will show you some pictures if you click the button</h2>
+    <h2>
+      I will show you some pictures if you click the button
+    </h2>
+
     <img width="75"
          src="../../assets/170-1707001_arrow-button-pointing-down-png-image-down-arrow.png">
-    <button (click)="nextPicture()">
+
+    <button class="picture-button" (click)="nextPicture()">
       Click me!
     </button>
+
     <img *ngIf="imageSource"
          width="300"
          [src]="imageSource">

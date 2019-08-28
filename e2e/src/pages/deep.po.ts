@@ -1,19 +1,13 @@
-import { $, browser } from 'protractor';
+import { $ } from 'protractor';
 
 export class DeepPage {
-
-  static async navigateTo() {
-    await browser.get('/some-deep-page');
-
-    return this.getInstance();
-  }
 
   static getInstance() {
     return new DeepPage();
   }
 
   async clickNextPicture() {
-    await $('button').click();
+    await $('button.picture-button').click();
   }
 
   async clickBack() {
@@ -22,5 +16,31 @@ export class DeepPage {
 
   async getPictureScr() {
     return await $('img[width="300"]').getAttribute('src');
+  }
+
+  async enterFirstName(text) {
+    this.setInputValue(text, 'First name');
+  }
+
+  async enterLastName(text) {
+    this.setInputValue(text, 'Last name');
+  }
+
+  async setInputValue(text, placeholder) {
+    const inputElement = await this.getUserFormInput(placeholder);
+    inputElement.clear();
+    inputElement.sendKeys(text);
+  }
+
+  async getUserFormInput(placeholder) {
+    return $(`input[placeholder="${placeholder}"]`);
+  }
+
+  async submitUserForm() {
+    return $('button.user-submit').click();
+  }
+
+  async getUserData() {
+    return $('div.user').getText();
   }
 }

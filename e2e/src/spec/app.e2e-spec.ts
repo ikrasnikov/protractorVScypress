@@ -7,8 +7,24 @@ describe('demo tests by Protractor', () => {
   let page: AppPage;
   let deepPage: DeepPage;
 
+  const timeout = 500;
+  const testUser1 = {
+    firstName: 'Vasya',
+    lastName: 'Petrov',
+  };
+
+  const testUser2 = {
+    firstName: 'John',
+    lastName: 'Cena',
+  };
+
+
   beforeAll(() => {
     browser.driver.manage().window().maximize();
+  });
+
+  beforeEach(() => {
+    browser.driver.sleep(timeout);
   });
 
   it('check router redirect', async () => {
@@ -29,25 +45,15 @@ describe('demo tests by Protractor', () => {
   });
 
   it('check Tour of Heroes link', async () => {
-    page.getLink('Tour of Heroes').click();
-    const urlInNewTab = await page.getNewTabUrl();
-    expect(urlInNewTab).toContain('https://angular.io/tutorial');
+    expect(page.getLink('Tour of Heroes').getAttribute('href')).toContain('https://angular.io/tutorial');
   });
 
   it('check CLI Documentation', async () => {
-    await browser.waitForAngularEnabled(false);
-    page.getLink('CLI Documentation').click();
-    const urlInNewTab = await page.getNewTabUrl();
-    expect(urlInNewTab).toContain('https://github.com/angular/angular-cli/wiki');
-    await browser.waitForAngularEnabled(true);
+    expect(page.getLink('CLI Documentation').getAttribute('href')).toContain('https://github.com/angular/angular-cli/wiki');
   });
 
   it('check Angular blog', async () => {
-    await browser.waitForAngularEnabled(false);
-    page.getLink('Angular blog').click();
-    const urlInNewTab = await page.getNewTabUrl();
-    expect(urlInNewTab).toContain('https://blog.angular.io/');
-    await browser.waitForAngularEnabled(true);
+    expect(page.getLink('Angular blog').getAttribute('href')).toContain('https://blog.angular.io/');
   });
 
   it('check Redirect to deep page', async () => {
@@ -55,21 +61,42 @@ describe('demo tests by Protractor', () => {
     expect(browser.getCurrentUrl()).toContain('http://localhost:4200/some-deep-page');
   });
 
+  it('check user form', async () => {
+    await deepPage.enterFirstName(testUser1.firstName);
+    await deepPage.enterLastName(testUser1.lastName);
+    await deepPage.submitUserForm();
+    expect(deepPage.getUserData()).toEqual(`${testUser1.firstName} ${testUser1.lastName}`);
+    await browser.driver.sleep(timeout);
+
+    await deepPage.enterFirstName(testUser2.firstName);
+    await deepPage.enterLastName(testUser2.lastName);
+    await deepPage.submitUserForm();
+    expect(deepPage.getUserData()).toEqual(`${testUser2.firstName} ${testUser2.lastName}`);
+  });
+
   it('check picture change button', async () => {
     await deepPage.clickNextPicture();
     expect(deepPage.getPictureScr()).toContain('one.svg');
+    browser.driver.sleep(timeout);
 
     await deepPage.clickNextPicture();
     expect(deepPage.getPictureScr()).toContain('two.png');
+    browser.driver.sleep(timeout);
 
     await deepPage.clickNextPicture();
     expect(deepPage.getPictureScr()).toContain('three.png');
+    browser.driver.sleep(timeout);
 
     await deepPage.clickNextPicture();
     expect(deepPage.getPictureScr()).toContain('four.png');
+    browser.driver.sleep(timeout);
 
     await deepPage.clickNextPicture();
     expect(deepPage.getPictureScr()).toContain('five.png');
+    browser.driver.sleep(timeout);
+
+    await deepPage.clickNextPicture();
+    expect(deepPage.getPictureScr()).toContain('one.svg');
   });
 
   it('check back button', async () => {

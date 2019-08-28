@@ -8,6 +8,10 @@ import { Component } from '@angular/core';
 export class DeepComponentComponent {
 
   public imageSource = '';
+  public user = {
+    firstName: '',
+    lastName: ''
+  };
 
 
   private imageCounter;
@@ -29,5 +33,10 @@ export class DeepComponentComponent {
 
     this.imageCounter = this.imageCounter + 1;
     this.imageSource = this.imagesPath[this.imageCounter];
+  }
+
+  public submit(firstName, lastName) {
+    this.user.firstName = firstName;
+    this.user.lastName = lastName;
   }
 }
