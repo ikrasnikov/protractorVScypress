@@ -19,17 +19,17 @@ export class DeepPage {
   }
 
   async enterFirstName(text) {
-    this.setInputValue(text, 'First name');
+    await this.setInputValue(text, 'First name');
   }
 
   async enterLastName(text) {
-    this.setInputValue(text, 'Last name');
+    await this.setInputValue(text, 'Last name');
   }
 
   async setInputValue(text, placeholder) {
     const inputElement = await this.getUserFormInput(placeholder);
-    inputElement.clear();
-    inputElement.sendKeys(text);
+    await inputElement.clear();
+    await inputElement.sendKeys(text);
   }
 
   async getUserFormInput(placeholder) {
