@@ -77,23 +77,23 @@ describe('demo tests by Protractor', () => {
   it('check picture change button', async () => {
     await deepPage.clickNextPicture();
     expect(deepPage.getPictureScr()).toContain('one.svg');
-    browser.driver.sleep(timeout);
+    await browser.driver.sleep(timeout);
 
     await deepPage.clickNextPicture();
     expect(deepPage.getPictureScr()).toContain('two.png');
-    browser.driver.sleep(timeout);
+    await browser.driver.sleep(timeout);
 
     await deepPage.clickNextPicture();
     expect(deepPage.getPictureScr()).toContain('three.png');
-    browser.driver.sleep(timeout);
+    await browser.driver.sleep(timeout);
 
     await deepPage.clickNextPicture();
     expect(deepPage.getPictureScr()).toContain('four.png');
-    browser.driver.sleep(timeout);
+    await browser.driver.sleep(timeout);
 
     await deepPage.clickNextPicture();
     expect(deepPage.getPictureScr()).toContain('five.png');
-    browser.driver.sleep(timeout);
+    await browser.driver.sleep(timeout);
 
     await deepPage.clickNextPicture();
     expect(deepPage.getPictureScr()).toContain('one.svg');
