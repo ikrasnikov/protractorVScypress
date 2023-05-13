@@ -7,12 +7,14 @@ import { routes } from './routes';
 import { AppComponent } from './app.component';
 import { MainComponent } from './main/main.component';
 import { DeepComponentComponent } from './deep-component/deep-component.component';
+import { DeepComponentComponent1 } from './deep-component1/deep-component.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainComponent,
-    DeepComponentComponent
+    DeepComponentComponent,
+    DeepComponentComponent1,
   ],
   imports: [
     BrowserModule,
